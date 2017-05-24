@@ -36,7 +36,7 @@ namespace ExercicioRevisao
                     Console.WriteLine(Classificar(automovel.nome, automovel.km, automovel.potencia));
 
                 }
-            } 
+            }
 
             public static string Classificar(string modelo, double km, int pot)
             {
