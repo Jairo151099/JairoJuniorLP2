@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ExercicioRevisao
+namespace ConsoleApplication1
 {
     class Program
     {
@@ -13,57 +13,58 @@ namespace ExercicioRevisao
             public int qtd;
             public string nome;
             public double km;
+        }
+        static void Main(string[] args)
+        {
+            carro automovel;
+            int i;
 
-            static void Main(string[] args)
+            Console.WriteLine("Informe a quantidade de carros");
+            automovel.qtd = Convert.ToInt32(Console.ReadLine());
+
+            for (i = 0; i < automovel.qtd; i++)
             {
-                carro automovel;
-                int i;
+                Console.WriteLine("Informe o nome do carro");
+                automovel.nome = Console.ReadLine();
 
-                Console.WriteLine("Informe a quantidade de carros");
-                automovel.qtd = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Informe a quilometragem do carro");
+                automovel.km = double.Parse(Console.ReadLine());
 
-                for (i = 0; i < automovel.qtd; i++)
-                {
-                    Console.WriteLine("Informe o nome do carro");
-                    automovel.nome = Console.ReadLine();
+                Console.WriteLine("Informe a potencia do carro");
+                automovel.potencia = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Informe a quilometragem do carro");
-                    automovel.km = double.Parse(Console.ReadLine());
-
-                    Console.WriteLine("Informe a potencia do carro");
-                    automovel.potencia = int.Parse(Console.ReadLine());
-
-                    Console.WriteLine(Classificar(automovel.nome, automovel.km, automovel.potencia));
-
-                }
-            } 
-
-            public static string Classificar(string modelo, double km, int pot)
-            {
-                string classifRodagem, classifPot;
-
-                if (km <= 5000)
-                    classifRodagem = "novo";
-
-                else if (km <= 30000)
-                    classifRodagem = "seminovo";
-
-                else
-                    classifRodagem = "velho";
-
-                if (pot < 120)
-                    classifPot = "popular";
-
-                else if (pot <= 200)
-                    classifPot = "forte";
-
-                else
-                    classifPot = "potente";
-
-                return String.Format("{0} - {1} - {2}", modelo, classifRodagem, classifPot);
+                Console.WriteLine(Classificar(automovel));
 
             }
+        } //static void main
+
+        public static string Classificar(carro automovel)
+        {
+            string T, P;
+
+            if (automovel.km <= 5000)
+                T = "novo";
+
+            else if (automovel.km <= 30000)
+                T = "seminovo";
+
+            else
+                T = "velho";
+
+            if (automovel.potencia < 120)
+                P = "popular";
+
+            else if (automovel.potencia <= 200)
+                P = "forte";
+
+            else
+                P = "potente";
+
+            return String.Format("{0} - {1} - {2}", automovel.nome, T, P);
 
         }
+
     }
 }
+
+
