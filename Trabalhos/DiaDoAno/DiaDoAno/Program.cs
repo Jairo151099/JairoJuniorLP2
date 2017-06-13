@@ -67,14 +67,14 @@ namespace DiaDoAno
             }
             else
             {
-                Console.WriteLine("Tu é Doente?");
+                Console.WriteLine("Erro");
             }
             Console.WriteLine("{0}º dia do ano", d);
             Console.ReadKey();
 
 
 
-        
+
         }
     }
 }
