@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{10230C84-F7F6-4110-BA20-6A9A5895B19A}</ProjectGuid>
+    <ProjectGuid>{D1737C9D-A0EF-40D9-BA05-5B96E0F43D25}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LivrosHermione</RootNamespace>
-    <AssemblyName>LivrosHermione</AssemblyName>
+    <RootNamespace>_01_QuestaoProva</RootNamespace>
+    <AssemblyName>01-QuestaoProva</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Livro.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
