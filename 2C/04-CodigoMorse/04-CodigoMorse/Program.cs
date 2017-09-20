@@ -4,25 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _04CódigoMorse
+namespace _04_CodigoMorse
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("1 - Condificar. \n2 - Decodificar");
+            Mensagem msg = new Mensagem();
+            int n = 1;
 
-            int op = int.Parse(Console.ReadLine());
-            Mensagem m = new Mensagem();
-            m.Texto = Console.ReadLine();
+            while (n != 0)
+            {
+                Console.WriteLine("1- Codificar");
+                Console.WriteLine("2- Decodificar");
+                Console.WriteLine("3- Transmitir");
+                Console.WriteLine("0- Sair");
 
-            if (op == 1)
-                Console.WriteLine(m.Codificar());
-            else if (op == 2)
-                Console.WriteLine(m.Decodificar());
-            else
-                Console.WriteLine("Inválido");
+                n = int.Parse(Console.ReadLine());
 
+                if (n != 0)
+                {
+                    if (n == 1)
+                        Console.WriteLine(msg.Codificar());
+                    else if (n == 2)
+                        Console.WriteLine(msg.Decodificar());
+                }
+                else
+                    break;
+            }
         }
     }
 }

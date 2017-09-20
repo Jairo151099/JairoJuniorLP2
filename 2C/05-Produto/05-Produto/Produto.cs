@@ -4,37 +4,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _5Produto
+namespace _5_Produtos
 {
     class Produto
     {
         private int id;
-
         public int Id
         {
             get { return id; }
         }
-        public string Nome { get; set; }
 
-        private int quatidade;
-
-        public int Quantidade
+        private string nome;
+        public string Nome
         {
-            get { return quatidade; }
-        }
-        public double Preco { get; set; }
-
-        public void Repor(int repor)
-        {
-            this.quatidade += repor;
+            get { return nome; }
         }
 
-        public Produto(int id, string nome, int preco)
+        private int quantidade;
+        public int Qquantidade
+        {
+            get { return quantidade; }
+        }
+
+        public string Marca { get; set; }
+        public double Preço { get; set; }
+
+        public void Repor(int qtd)
+        {
+            quantidade += qtd;
+        }
+
+        public void Retirada(int qtd)
+        {
+            if (quantidade >= qtd)
+                quantidade -= qtd;
+
+            else throw new Exception("Uma retirada não pode exceder a quantidade em estoque atual");
+        }
+
+        public string Imprimir()
+        {
+            string x = Preço.ToString("0.00");
+            return String.Format("Produto {0} : {1} - R$ {2} - Estoque : {3}", id, nome, x, quantidade);
+        }
+
+        public Produto(int id, string nome, double preço)
         {
             this.id = id;
-            this.Nome = nome;
-            this.Preco = preco;
-            this.quatidade = 0;
+            this.nome = nome;
+            this.Preço = preço;
+            this.quantidade = 0;
         }
     }
 }

@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _07_ConversorMedidas
+namespace _6_Geometria
 {
     class Program
     {
         static void Main(string[] args)
         {
-        
-        
         }
     }
 }
