@@ -4,16 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _8Empresa
+namespace _8_Empresa
 {
     class Terceirizado : Empregado
     {
-        public string EmpresaMatriz { get; set; }
-
-        public Terceirizado(int reg, string data, string empresa)
-            : base(reg, data)
+        public Terceirizado(string n, string d, string g): base(n, d)
         {
-            this.EmpresaMatriz = empresa;
+            Empresa_Matriz = g;
         }
+        public string Empresa_Matriz { get; set; }
     }
 }

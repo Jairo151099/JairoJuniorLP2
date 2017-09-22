@@ -4,20 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _8Empresa
+namespace _8_Empresa
 {
     class Funcionario
     {
-        public int Registro { get; set; }
-        public string Nome { get; set; }
-        public double Salario { get; set; }
-        public int CPF { get; set; }
-        public string Email { get; set; }
-
-        public Funcionario(int reg)
+        public Funcionario(int h)
         {
-            Registro = reg;
+            Numero_Registro = h;
         }
+        public int Numero_Registro { get; set; }
+        public string Nome { get; set; }
+        public string Cpf { get; set; }
+        public string Email { get; set; }
+        public double Salario { get; set; }
 
     }
 }

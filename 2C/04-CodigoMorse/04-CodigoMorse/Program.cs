@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _04_CodigoMorse
+namespace _4_CodigoMorse
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Mensagem msg = new Mensagem();
+            Codigo msg = new Codigo();
             int n = 1;
 
             while (n != 0)

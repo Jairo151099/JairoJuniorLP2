@@ -4,20 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _8Empresa
+namespace _8_Empresa
 {
     class Empregado : Funcionario
     {
-        public string Gerente { get; set; }
-        public string Entrada { get; set; }
-        public Gerente gente { get; set; }
-
-        public Empregado(int reg, string data)
-            : base(reg)
+        public Empregado(int n, string d)
+            : base(n)
         {
-            this.Entrada = data;
+            Data_Entrada = d;
         }
-
-
+        public string Data_Entrada { get; set; }
+        public Gerente Gerente { get; set; }
     }
 }

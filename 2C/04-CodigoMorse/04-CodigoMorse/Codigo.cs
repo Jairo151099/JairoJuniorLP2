@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _04_CodigoMorse
+namespace _4_CodigoMorse
 {
-    class Mensagem
+    class Codigo
     {
         public string txt { get; set; }
         private char[] letra = new char[]
@@ -15,27 +15,27 @@ namespace _04_CodigoMorse
             'f', 'g', 'h', 'i', 'j',
             'k', 'l', 'm', 'n', 'o',
             'p', 'q', 'r', 's', 't',
-            'u', 'v', 'w', 'x', 'y', 'z'
+            'u', 'v', 'w', 'x', 'y', 'z',' '
         };
         private string[] tab = new string[]
         {
-            ".-", "-...", "-.-.", "-..", ".", //a, b, c, d, e
-            "..-.", "--.", "....", "..", ".---", //f, g, h, i, j
-            "-.-", ".-..", "--", "-.", "---", //k, l, m, n, o
-            ".--.", "--.-", ".-.", "...", "-", //p, q, r, s, t
-            "..-", "...-", ".--", "-..-", "-.--", "--.." //u, v, w, x, y, z
+            ".-", "-...", "-.-.", "-..", ".", 
+            "..-.", "--.", "....", "..", ".---",
+            "-.-", ".-..", "--", "-.", "---", 
+            ".--.", "--.-", ".-.", "...", "-", 
+            "..-", "...-", ".--", "-..-", "-.--", "--..", "-----"
         };
 
         public string Codificar()
         {
             string codigo = "", morse = "";
 
-            Console.WriteLine("Mensagem:");
+            Console.WriteLine("Codigo:");
             txt = Console.ReadLine();
 
             for (int i = 0; i < txt.Length; i++)
             {
-                for (int p = 0; p < 26; p++)
+                for (int p = 0; p < 27; p++)
                 {
                     if (txt[i] == letra[p])
                     {
@@ -55,14 +55,14 @@ namespace _04_CodigoMorse
             string mensagem = "";
             char caracter = ' ';
 
-            Console.WriteLine("Mensagem:");
+            Console.WriteLine("Codigo:");
             txt = Console.ReadLine();
 
             string[] codigo = txt.Split(' ');
 
             for (int i = 0; i < codigo.Length; i++)
             {
-                for (int p = 0; p < 26; p++)
+                for (int p = 0; p < 27; p++)
                 {
                     if (codigo[i] == tab[p])
                     {
