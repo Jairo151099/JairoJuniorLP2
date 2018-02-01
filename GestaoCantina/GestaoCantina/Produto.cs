@@ -9,8 +9,12 @@ namespace GestaoCantina
     class Produto
     {
         public string Nome { get; set; }
+        
         public string Valor { get; set; }
-        public string Quantidadet { get; set; }
+        
+        public string Quantidade { get; set; }
+
+        public string Codigo { get; set; }
 
     }
 }
