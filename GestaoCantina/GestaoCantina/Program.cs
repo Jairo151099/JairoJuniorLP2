@@ -166,20 +166,33 @@ namespace ProjetoConsole
                 }
                 else if (x == 3)
                 {
-                    
-                    SqlDataReader ver = cmd.ExecuteReader();
+ 
                     conn.Open();
-                    
-                    if(Reader.HasRows)
+                    CommandText = @"SELECT Id, Sexo, Nome, Salário, Idade, Turno
+                                FROM Funcionário;";
+                    SqlDataReader ler = cmd.ExecuteReader();
+                    if (ler.HasRows)
                     {
+                        while(ler.Read())
+                        {
+                            int Id = ler.GetInt32(0);
+                            string Sexo = ler.GetString(1);
+                            string Nome = ler.GetString(2);
+                            string Salário = ler.GetString(3);
+                            string Idade = ler.GetString(4);
+                            string Turno = ler.GetString(5);
+                          
+                        }
 
                     }
-                    conn.Close();
+                    cmd.Connection.Close();
                 }
 
                
             }
         }
+
+        public static string CommandText { get; set; }
     }
 }
                
