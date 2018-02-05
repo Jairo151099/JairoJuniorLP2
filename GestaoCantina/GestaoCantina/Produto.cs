@@ -10,11 +10,10 @@ namespace GestaoCantina
     {
         public string Nome { get; set; }
         
-        public string Valor { get; set; }
+        public double Valor { get; set; }
         
-        public string Quantidade { get; set; }
+        public int Quantidade { get; set; }
 
-        public string Codigo { get; set; }
 
     }
 }

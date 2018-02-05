@@ -12,9 +12,9 @@ namespace ProjetoConsole
     {
         static void Main(string[] args)
         {
-            int x, y, del4;
-            double del5;
-            string del1, del2, del3;
+            int x, y, z, del4, dele3;
+            double del5, dele2;
+            string del1, del2, del3, dele1;
             Produto prod = new Produto();
             Funcionario func = new Funcionario();
             Faturamento fat = new Faturamento();
@@ -191,29 +191,154 @@ namespace ProjetoConsole
                     }
                     cmd.Connection.Close();
                 }
-                /*else if (x == 4)
+                else if (x == 4)
                 {
+                    Console.WriteLine("Informe o ID do Funcionario");
+                    int Id = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Informe novo salário");
                     cmd.Connection.Open();
 
-                    cmd.Parameters.AddWithValue("Saldo", SaldoUsuario);
-                    cmd.Parameters.AddWithValue("nConta", c.nConta);
+                    cmd.Parameters.AddWithValue("Salario", func.Salario);
+                    cmd.Parameters.AddWithValue("@Id", Id);
 
-                    cmd.CommandText = @"UPDATE Conta
-                                                        SET Saldo = @Saldo
-                                                        WHERE id = @nConta;";
+                    cmd.CommandText = @"UPDATE Funcionario
+                                                        SET Salario = @salario
+                                                        WHERE Id = @id;";
+
+                    double Salario = double.Parse(Console.ReadLine());
 
                     cmd.ExecuteNonQuery();
 
-                    cmd.Parameters.RemoveAt("nConta");
-                    cmd.Parameters.RemoveAt("Saldo");
+
 
                     cmd.Connection.Close();
-                }*/
+
+                    Console.WriteLine("Alteração concluída");
+                }
+                else if (x == 5)
+                {
+                    Console.WriteLine("Determine:");
+
+                    Console.Write("Nome:");
+                    prod.Nome = Console.ReadLine();
+                    Console.Write("Valor:");
+                    prod.Valor = double.Parse(Console.ReadLine());
+                    Console.Write("Quantidade:");
+                    prod.Quantidade = int.Parse(Console.ReadLine());
 
 
-            }
-        }
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("Nome", prod.Nome);
+                    cmd.Parameters.AddWithValue("Valor", prod.Valor);
+                    cmd.Parameters.AddWithValue("Quantidade", prod.Quantidade);
+
+                    cmd.CommandText = string.Format(@"INSERT 
+                                    INTO Produto(Nome, Valor, Quantidade)
+                                    VALUES (@Nome, @Valor, @Quantidade);");
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.Parameters.RemoveAt("Nome");
+                    cmd.Parameters.RemoveAt("Valor");
+                    cmd.Parameters.RemoveAt("Quantidade");
+
+                    conn.Close();
+                }
+                else if (x == 6)
+                {
+                    Console.WriteLine("\n1- Deletar Nome \n2- Deletar valor \n3- Deletar Quantidade");
+                    z = int.Parse(Console.ReadLine());
+
+                    if (z == 1)
+                    {
+
+                        Console.WriteLine("Informe o nome a ser deletado");
+                        dele1 = Console.ReadLine();
+                        conn.Open();
+                        cmd.Parameters.AddWithValue("Nome", dele1);
+                        cmd.CommandText = @"DELETE FROM Produto
+                                            WHERE Nome = @nome";
+
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.RemoveAt("Nome");
+                        conn.Close();
+
+                        Console.WriteLine("Delete concluído");
+
+                    }
+                    else if (z == 2)
+                    {
+
+                        Console.WriteLine("Informe o valor a ser deletado");
+                        dele2 = double.Parse(Console.ReadLine());
+                        conn.Open();
+                        cmd.Parameters.AddWithValue("Valor", dele2);
+                        cmd.CommandText = @"DELETE FROM Produto
+                                            WHERE Valor = @valor";
+
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.RemoveAt("Valor");
+                        conn.Close();
+
+                        Console.WriteLine("Delete concluído");
+
+                    }
+                    else if (z == 3)
+                    {
+
+                        Console.WriteLine("Informe a quantidade a ser deletada");
+                        dele3 = int.Parse(Console.ReadLine());
+                        conn.Open();
+                        cmd.Parameters.AddWithValue("Quantidade", dele3);
+                        cmd.CommandText = @"DELETE FROM Produto
+                                            WHERE Quantidade = @quantidade";
+
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.RemoveAt("Quantidade");
+                        conn.Close();
+
+                        Console.WriteLine("Delete concluído");
+
+                    }
+                    
+                }
+                else if (x == 7)
+                {
+                    Console.WriteLine("Informe o ID do produto");
+                    int Id = int.Parse(Console.ReadLine());
+
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@Id", Id);
+                    cmd.CommandText = @"SELECT Nome, Valor, Quantidade
+                                FROM Produto WHERE Id = @Id;";
 
 
-    }
+
+                    SqlDataReader ler = cmd.ExecuteReader();
+                    if (ler.HasRows)
+                    {
+
+                        while (ler.Read())
+                        {
+                            string Nome = ler.GetString(0);
+                            double Valor = ler.GetDouble(1);
+                            int Quantidade = ler.GetInt32(2);
+
+                            Console.WriteLine("{0}, {1}, {2}", Nome, Valor, Quantidade);
+                        }
+
+                    }
+                    cmd.Connection.Close();
+                }
+                else if (x == 8)
+                {
+
+                }
+
+             }
+         }
+     }
+
 }
