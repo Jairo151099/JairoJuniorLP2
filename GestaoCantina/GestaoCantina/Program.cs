@@ -12,8 +12,8 @@ namespace ProjetoConsole
     {
         static void Main(string[] args)
         {
-            int x, y, z, del4, dele3;
-            double del5, dele2;
+            int x, y, z, w, del4, dele3;
+            double del5, dele2, delet1, delet2;
             string del1, del2, del3, dele1;
             Produto prod = new Produto();
             Funcionario func = new Funcionario();
@@ -334,9 +334,111 @@ namespace ProjetoConsole
                 }
                 else if (x == 8)
                 {
+                    //ehufheshguhserughs
+                }
+                else if (x == 9)
+                {
+                    Console.WriteLine("Determine:");
+
+                    Console.Write("Lucro:");
+                    fat.Lucro = double.Parse(Console.ReadLine());
+                    Console.Write("Despesa:");
+                    fat.Despesa = double.Parse(Console.ReadLine());
+
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("Lucro", fat.Lucro);
+                    cmd.Parameters.AddWithValue("Despesa", fat.Despesa);
+
+
+                    cmd.CommandText = string.Format(@"INSERT 
+                                    INTO Faturamento(Lucro, Despesa)
+                                    VALUES (@Lucro, @Despesa);");
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.Parameters.RemoveAt("Lucro");
+                    cmd.Parameters.RemoveAt("Despesa");
+
+                    conn.Close();
+                }
+                
+                else if (x == 10)
+                {
+                    Console.WriteLine("\n1- Deletar Lucro \n2- Deletar Despesa");
+                    w = int.Parse(Console.ReadLine());
+
+                    if (w == 1)
+                    {
+
+                        Console.WriteLine("Informe o Lucro a ser deletado");
+                        delet1 = double.Parse(Console.ReadLine());
+                        conn.Open();
+                        cmd.Parameters.AddWithValue("Lucro", delet1);
+                        cmd.CommandText = @"DELETE FROM Faturamento
+                                            WHERE Lucro = @Lucro";
+
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.RemoveAt("Lucro");
+                        conn.Close();
+
+                        Console.WriteLine("Delete concluído");
+
+                    }
+                    else if (w == 2)
+                    {
+
+                        Console.WriteLine("Informe a Despesa a ser deletada");
+                        delet2 = double.Parse(Console.ReadLine());
+                        conn.Open();
+                        cmd.Parameters.AddWithValue("Despesa", delet2);
+                        cmd.CommandText = @"DELETE FROM Faturamento
+                                            WHERE Faturamento = @Faturamento";
+
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.RemoveAt("Faturamento");
+                        conn.Close();
+
+                        Console.WriteLine("Delete concluído");
+
+                    }
+               
+                    cmd.Connection.Close();
 
                 }
+                else if (x == 11)
+                {
+                    Console.WriteLine("Informe o ID do Faturamento");
+                    int Id = int.Parse(Console.ReadLine());
 
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@Id", Id);
+                    cmd.CommandText = @"SELECT Lucro, Despesa
+                                FROM Faturamento WHERE Id = @Id;";
+
+
+
+                    SqlDataReader ler = cmd.ExecuteReader();
+                    if (ler.HasRows)
+                    {
+
+                        while (ler.Read())
+                        {
+
+                            double Lucro = ler.GetDouble(0);
+                            double Despesa = ler.GetDouble(1);
+
+
+                            Console.WriteLine("{0}, {1}", Lucro, Despesa );
+                        }
+
+                    }
+                    cmd.Connection.Close();
+                }
+                else if (x == 12)
+                {
+                    //ehufheshguhserughs
+                }
              }
          }
      }
