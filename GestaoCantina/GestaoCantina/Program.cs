@@ -33,7 +33,7 @@ namespace ProjetoConsole
 
                 if (x == 1)
                 {
-                   
+
 
                     Console.WriteLine("Determine:");
 
@@ -56,10 +56,10 @@ namespace ProjetoConsole
                     cmd.Parameters.AddWithValue("Idade", func.Idade);
                     cmd.Parameters.AddWithValue("Salario", func.Salario);
 
-                    cmd.CommandText = string.Format (@"INSERT 
+                    cmd.CommandText = string.Format(@"INSERT 
                                     INTO Funcionario(Nome, Sexo, Turno, Idade, Salario)
                                     VALUES (@Nome, @Sexo, @Turno, @Idade, @Salario);");
-                    
+
                     cmd.ExecuteNonQuery();
 
                     cmd.Parameters.RemoveAt("Nome");
@@ -69,7 +69,7 @@ namespace ProjetoConsole
                     cmd.Parameters.RemoveAt("Salario");
 
                     conn.Close();
-            
+
                 }
                 else if (x == 2)
                 {
@@ -83,25 +83,25 @@ namespace ProjetoConsole
                         del1 = Console.ReadLine();
                         conn.Open();
                         cmd.Parameters.AddWithValue("nome", del1);
-                        cmd.CommandText = @"DELETE * FROM Funcionario
+                        cmd.CommandText = @"DELETE FROM Funcionario
                                             WHERE Nome = @nome";
-                        
+
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.RemoveAt("Nome");
                         conn.Close();
 
                         Console.WriteLine("Delete concluído");
-                        
+
                     }
                     else if (y == 2)
                     {
-                       
+
                         Console.WriteLine("Informe o sexo a ser deletado");
                         del2 = Console.ReadLine();
                         conn.Open();
                         cmd.Parameters.AddWithValue("Sexo", del2);
-                        cmd.CommandText = @"DELETE * FROM Funcionario
-                                            WHERE Sexo = @Sexo";
+                        cmd.CommandText = @"DELETE FROM Funcionario
+                                            WHERE Sexo = @sexo";
 
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.RemoveAt("Sexo");
@@ -112,13 +112,13 @@ namespace ProjetoConsole
                     }
                     else if (y == 3)
                     {
-                        
+
                         Console.WriteLine("Informe o Turno a ser deletado");
                         del3 = Console.ReadLine();
                         conn.Open();
                         cmd.Parameters.AddWithValue("Turno", del3);
-                        cmd.CommandText = @"DELETE * FROM Funcionario
-                                            WHERE Turno = @Turno";
+                        cmd.CommandText = @"DELETE FROM Funcionario
+                                            WHERE Turno = @turno";
 
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.RemoveAt("Turno");
@@ -129,17 +129,15 @@ namespace ProjetoConsole
                     }
                     else if (y == 4)
                     {
-                        SqlCommand cmmd = new SqlCommand();
-                        SqlConnection connn = new SqlConnection("Data Source=localhost;Initial Catalog=GestaoCantina;Integrated Security=SSPI");
                         Console.WriteLine("Informa a idade a ser deletado");
                         del4 = int.Parse(Console.ReadLine());
                         conn.Open();
-                        cmd.Parameters.AddWithValue("Sexo", del4);
-                        cmd.CommandText = @"DELETE * FROM Funcionario
-                                            WHERE Sexo = @Sexo";
+                        cmd.Parameters.AddWithValue("Idade", del4);
+                        cmd.CommandText = @"DELETE FROM Funcionario
+                                            WHERE Idade = @idade";
 
                         cmd.ExecuteNonQuery();
-                        cmd.Parameters.RemoveAt("Sexo");
+                        cmd.Parameters.RemoveAt("Idade");
                         conn.Close();
 
                         Console.WriteLine("Delete concluído");
@@ -147,14 +145,12 @@ namespace ProjetoConsole
                     }
                     else if (y == 5)
                     {
-                        SqlCommand cmmd = new SqlCommand();
-                        SqlConnection connn = new SqlConnection("Data Source=localhost;Initial Catalog=GestaoCantina;Integrated Security=SSPI");
                         Console.WriteLine("Informe o salario a ser deletado");
                         del5 = double.Parse(Console.ReadLine());
                         conn.Open();
                         cmd.Parameters.AddWithValue("Salario", del5);
-                        cmd.CommandText = @"DELETE * FROM Funcionario
-                                            WHERE Salario = @Salario";
+                        cmd.CommandText = @"DELETE FROM Funcionario
+                                            WHERE Salario = @salario";
 
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.RemoveAt("Salario");
@@ -162,37 +158,62 @@ namespace ProjetoConsole
 
                         Console.WriteLine("Delete concluído");
 
-                    }       
+                    }
                 }
+
                 else if (x == 3)
                 {
- 
+                    Console.WriteLine("Informe o ID do Funcionario");
+                    int Id = int.Parse(Console.ReadLine());
+
                     conn.Open();
-                    CommandText = @"SELECT Id, Sexo, Nome, Salário, Idade, Turno
-                                FROM Funcionário;";
+                    cmd.Parameters.AddWithValue("@Id", Id);
+                    cmd.CommandText = @"SELECT Nome, Sexo , Salario, Turno, Idade
+                                FROM Funcionario WHERE Id = @Id;";
+
+
+
                     SqlDataReader ler = cmd.ExecuteReader();
                     if (ler.HasRows)
                     {
-                        while(ler.Read())
+
+                        while (ler.Read())
                         {
-                            int Id = ler.GetInt32(0);
+                            string Nome = ler.GetString(0);
                             string Sexo = ler.GetString(1);
-                            string Nome = ler.GetString(2);
-                            string Salário = ler.GetString(3);
-                            string Idade = ler.GetString(4);
-                            string Turno = ler.GetString(5);
-                          
+                            double Salario = ler.GetDouble(2);
+                            string Turno = ler.GetString(3);
+                            int Idade = ler.GetInt32(4);
+
+                            Console.WriteLine("{0}, {1}, {2}, {3}, {4}", Nome, Sexo, Salario, Turno, Idade);
                         }
 
                     }
                     cmd.Connection.Close();
                 }
+                /*else if (x == 4)
+                {
+                    cmd.Connection.Open();
 
-               
+                    cmd.Parameters.AddWithValue("Saldo", SaldoUsuario);
+                    cmd.Parameters.AddWithValue("nConta", c.nConta);
+
+                    cmd.CommandText = @"UPDATE Conta
+                                                        SET Saldo = @Saldo
+                                                        WHERE id = @nConta;";
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.Parameters.RemoveAt("nConta");
+                    cmd.Parameters.RemoveAt("Saldo");
+
+                    cmd.Connection.Close();
+                }*/
+
+
             }
         }
 
-        public static string CommandText { get; set; }
+
     }
 }
-               
