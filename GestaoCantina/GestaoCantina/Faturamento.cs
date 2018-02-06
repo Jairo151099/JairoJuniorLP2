@@ -10,6 +10,6 @@ namespace GestaoCantina
     {
         public double Lucro { get; set; }
 
-        public double Despesa { get; set; }
+        public double Preco { get; set; }
     }
 }

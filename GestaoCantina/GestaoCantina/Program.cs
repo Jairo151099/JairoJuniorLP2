@@ -13,7 +13,7 @@ namespace ProjetoConsole
         static void Main(string[] args)
         {
             int x, y, z, w, del4, dele3;
-            double del5, dele2, delet1, delet2;
+            double del5, dele2, delet1, delet2, Despesa = 0;
             string del1, del2, del3, dele1;
             Produto prod = new Produto();
             Funcionario func = new Funcionario();
@@ -25,7 +25,7 @@ namespace ProjetoConsole
             SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=GestaoCantina;Integrated Security=SSPI");
             cmd.Connection = conn;
 
-            Console.WriteLine(" 1 - Adicionar funcionário\n 2 - Remover funcionário\n 3 - Consultar funcionário\n 4 - Alterar funcionário\n 5 - Adicionar produto\n 6 - Remover produto\n 7 - Consultar produto\n 8 - Alterar produto\n 9 - Adicionar faturamento\n 10 - Remover faturamento\n 11 - Alterar faturamento\n 12 - Consultar faturamento\n :");
+            Console.WriteLine(" 1 - Adicionar funcionário\n 2 - Remover funcionário\n 3 - Consultar funcionário\n 4 - Alterar funcionário\n 5 - Adicionar produto\n 6 - Remover produto\n 7 - Consultar produto\n 8 - Alterar produto\n 9 - Adicionar faturamento\n 10 - Remover faturamento\n 11 - Consultar faturamento\n 12 - Alterar faturamento\n :");
             while (x != 0)
             {
 
@@ -47,6 +47,7 @@ namespace ProjetoConsole
                     func.Idade = int.Parse(Console.ReadLine());
                     Console.Write("Salario:");
                     func.Salario = double.Parse(Console.ReadLine());
+                    
 
                     conn.Open();
 
@@ -198,15 +199,18 @@ namespace ProjetoConsole
 
                     Console.WriteLine("Informe novo salário");
                     cmd.Connection.Open();
+                    func.Salario = double.Parse(Console.ReadLine());
+                    Console.WriteLine("Informe novo turno");
+                    func.Turno = Console.ReadLine();
 
                     cmd.Parameters.AddWithValue("Salario", func.Salario);
+                    cmd.Parameters.AddWithValue("Turno", func.Turno);
                     cmd.Parameters.AddWithValue("@Id", Id);
 
                     cmd.CommandText = @"UPDATE Funcionario
-                                                        SET Salario = @salario
+                                                        SET Salario = @salario, Turno = @Turno
                                                         WHERE Id = @id;";
 
-                    double Salario = double.Parse(Console.ReadLine());
 
                     cmd.ExecuteNonQuery();
 
@@ -334,7 +338,28 @@ namespace ProjetoConsole
                 }
                 else if (x == 8)
                 {
-                    //ehufheshguhserughs
+                    Console.WriteLine("Informe o ID do Produto");
+                    int Id = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Informe novo Produto");
+                    cmd.Connection.Open();
+                    func.Salario = double.Parse(Console.ReadLine());
+
+                    cmd.Parameters.AddWithValue("Salario", func.Salario);
+                    cmd.Parameters.AddWithValue("@Id", Id);
+
+                    cmd.CommandText = @"UPDATE Funcionario
+                                                        SET Salario = @salario
+                                                        WHERE Id = @id;";
+
+
+                    cmd.ExecuteNonQuery();
+
+
+
+                    cmd.Connection.Close();
+
+                    Console.WriteLine("Alteração concluída");
                 }
                 else if (x == 9)
                 {
@@ -342,30 +367,30 @@ namespace ProjetoConsole
 
                     Console.Write("Lucro:");
                     fat.Lucro = double.Parse(Console.ReadLine());
-                    Console.Write("Despesa:");
-                    fat.Despesa = double.Parse(Console.ReadLine());
+                    Console.Write("Preco:");
+                    fat.Preco = double.Parse(Console.ReadLine());
 
                     conn.Open();
 
                     cmd.Parameters.AddWithValue("Lucro", fat.Lucro);
-                    cmd.Parameters.AddWithValue("Despesa", fat.Despesa);
+                    cmd.Parameters.AddWithValue("Preco", fat.Preco);
 
 
                     cmd.CommandText = string.Format(@"INSERT 
-                                    INTO Faturamento(Lucro, Despesa)
-                                    VALUES (@Lucro, @Despesa);");
+                                    INTO Faturamento(Lucro, Preco)
+                                    VALUES (@Lucro, @Preco);");
 
                     cmd.ExecuteNonQuery();
 
                     cmd.Parameters.RemoveAt("Lucro");
-                    cmd.Parameters.RemoveAt("Despesa");
+                    cmd.Parameters.RemoveAt("Preco");
 
                     conn.Close();
                 }
                 
                 else if (x == 10)
                 {
-                    Console.WriteLine("\n1- Deletar Lucro \n2- Deletar Despesa");
+                    Console.WriteLine("\n1- Deletar Lucro \n2- Deletar Preco");
                     w = int.Parse(Console.ReadLine());
 
                     if (w == 1)
@@ -388,10 +413,10 @@ namespace ProjetoConsole
                     else if (w == 2)
                     {
 
-                        Console.WriteLine("Informe a Despesa a ser deletada");
+                        Console.WriteLine("Informe a Preco a ser deletada");
                         delet2 = double.Parse(Console.ReadLine());
                         conn.Open();
-                        cmd.Parameters.AddWithValue("Despesa", delet2);
+                        cmd.Parameters.AddWithValue("Preco", delet2);
                         cmd.CommandText = @"DELETE FROM Faturamento
                                             WHERE Faturamento = @Faturamento";
 
@@ -413,10 +438,8 @@ namespace ProjetoConsole
 
                     conn.Open();
                     cmd.Parameters.AddWithValue("@Id", Id);
-                    cmd.CommandText = @"SELECT Lucro, Despesa
+                    cmd.CommandText = @"SELECT Lucro, Preco
                                 FROM Faturamento WHERE Id = @Id;";
-
-
 
                     SqlDataReader ler = cmd.ExecuteReader();
                     if (ler.HasRows)
@@ -426,18 +449,20 @@ namespace ProjetoConsole
                         {
 
                             double Lucro = ler.GetDouble(0);
-                            double Despesa = ler.GetDouble(1);
+                            double preco = ler.GetDouble(1);
 
 
-                            Console.WriteLine("{0}, {1}", Lucro, Despesa );
+                            Console.WriteLine("{0}, {1}", Lucro + preco );
                         }
-
+                        Despesa = fat.Lucro - fat.Preco;
+                        Console.WriteLine("A despesa é {0}", Despesa);
                     }
                     cmd.Connection.Close();
+
                 }
                 else if (x == 12)
                 {
-                    //ehufheshguhserughs
+                    //ehufheshguhserughs1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
                 }
              }
          }
