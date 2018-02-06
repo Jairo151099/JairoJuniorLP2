@@ -330,7 +330,7 @@ namespace ProjetoConsole
                             double Valor = ler.GetDouble(1);
                             int Quantidade = ler.GetInt32(2);
 
-                            Console.WriteLine("{0}, {1}, {2}", Nome, Valor, Quantidade);
+                            Console.WriteLine("{0} \n{1} \n{2}", Nome, Valor, Quantidade);
                         }
 
                     }
@@ -341,15 +341,23 @@ namespace ProjetoConsole
                     Console.WriteLine("Informe o ID do Produto");
                     int Id = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Informe novo Produto");
+                    Console.WriteLine("Informe o nome do novo Produto");
                     cmd.Connection.Open();
-                    func.Salario = double.Parse(Console.ReadLine());
+                    prod.Nome = Console.ReadLine();
+                    
+                    Console.WriteLine("Informe novo valor");
+                    prod.Valor = double.Parse(Console.ReadLine());
 
-                    cmd.Parameters.AddWithValue("Salario", func.Salario);
+                    Console.WriteLine("Informe nova quantidade");
+                    prod.Quantidade = int.Parse(Console.ReadLine());
+
+                    cmd.Parameters.AddWithValue("Nome", prod.Nome);
+                    cmd.Parameters.AddWithValue("Valor", prod.Valor);
+                    cmd.Parameters.AddWithValue("Quantidade", prod.Quantidade);
                     cmd.Parameters.AddWithValue("@Id", Id);
 
-                    cmd.CommandText = @"UPDATE Funcionario
-                                                        SET Salario = @salario
+                    cmd.CommandText = @"UPDATE Produto
+                                                        SET Nome = @nome, Valor = @valor, Quantidade = @quantidade
                                                         WHERE Id = @id;";
 
 
@@ -452,7 +460,7 @@ namespace ProjetoConsole
                             double preco = ler.GetDouble(1);
 
 
-                            Console.WriteLine("{0}, {1}", Lucro + preco );
+                            Console.WriteLine("{0} \n{1}", Lucro, preco );
                         }
                         Despesa = fat.Lucro - fat.Preco;
                         Console.WriteLine("A despesa é {0}", Despesa);
@@ -462,7 +470,31 @@ namespace ProjetoConsole
                 }
                 else if (x == 12)
                 {
-                    //ehufheshguhserughs1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+                    Console.WriteLine("Informe o ID do faturamento");
+                    int Id = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Informe o novo Lucro");
+                    cmd.Connection.Open();
+                    fat.Lucro = double.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Informe novo preco");
+                    fat.Preco = double.Parse(Console.ReadLine());
+
+                    cmd.Parameters.AddWithValue("Lucro", fat.Lucro);
+                    cmd.Parameters.AddWithValue("Preco", fat.Preco);
+                    cmd.Parameters.AddWithValue("@Id", Id);
+
+                    cmd.CommandText = @"UPDATE Faturamento
+                                                        SET Lucro = @lucro, Preco = @preco
+                                                        WHERE Id = @id;";
+
+
+                    cmd.ExecuteNonQuery();
+
+
+
+                    cmd.Connection.Close();
+                    Console.WriteLine("Alteração concluída");
                 }
              }
          }
