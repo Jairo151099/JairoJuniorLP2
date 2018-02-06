@@ -68,9 +68,9 @@ namespace ProjetoConsole
                     cmd.Parameters.RemoveAt("Turno");
                     cmd.Parameters.RemoveAt("Idade");
                     cmd.Parameters.RemoveAt("Salario");
-
+                    
                     conn.Close();
-
+                    Console.WriteLine("Ok!");
                 }
                 else if (x == 2)
                 {
@@ -190,6 +190,7 @@ namespace ProjetoConsole
                         }
 
                     }
+                    cmd.Parameters.RemoveAt("@Id");
                     cmd.Connection.Close();
                 }
                 else if (x == 4)
@@ -249,6 +250,7 @@ namespace ProjetoConsole
                     cmd.Parameters.RemoveAt("Quantidade");
 
                     conn.Close();
+                    Console.WriteLine("Ok!");
                 }
                 else if (x == 6)
                 {
@@ -334,6 +336,7 @@ namespace ProjetoConsole
                         }
 
                     }
+                    cmd.Parameters.RemoveAt("@Id");
                     cmd.Connection.Close();
                 }
                 else if (x == 8)
@@ -382,7 +385,7 @@ namespace ProjetoConsole
 
                     cmd.Parameters.AddWithValue("Lucro", fat.Lucro);
                     cmd.Parameters.AddWithValue("Preco", fat.Preco);
-
+                    
 
                     cmd.CommandText = string.Format(@"INSERT 
                                     INTO Faturamento(Lucro, Preco)
@@ -392,7 +395,7 @@ namespace ProjetoConsole
 
                     cmd.Parameters.RemoveAt("Lucro");
                     cmd.Parameters.RemoveAt("Preco");
-
+                    Console.WriteLine("Ok!");
                     conn.Close();
                 }
                 
@@ -448,6 +451,8 @@ namespace ProjetoConsole
                     cmd.Parameters.AddWithValue("@Id", Id);
                     cmd.CommandText = @"SELECT Lucro, Preco
                                 FROM Faturamento WHERE Id = @Id;";
+                    double Lucro = 0;
+                    double preco = 0;
 
                     SqlDataReader ler = cmd.ExecuteReader();
                     if (ler.HasRows)
@@ -455,17 +460,17 @@ namespace ProjetoConsole
 
                         while (ler.Read())
                         {
-
-                            double Lucro = ler.GetDouble(0);
-                            double preco = ler.GetDouble(1);
+                            Lucro = ler.GetDouble(0);
+                            preco = ler.GetDouble(1);
 
 
                             Console.WriteLine("{0} \n{1}", Lucro, preco );
                         }
-                        Despesa = fat.Lucro - fat.Preco;
+                        Despesa = Lucro - preco;
                         Console.WriteLine("A despesa é {0}", Despesa);
                     }
                     cmd.Connection.Close();
+                    cmd.Parameters.RemoveAt("@Id");
 
                 }
                 else if (x == 12)
