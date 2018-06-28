@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CFD29DBE-0403-4484-9A7C-CDFAA8149405}</ProjectGuid>
+    <ProjectGuid>{DBA04426-F2F6-4A72-A2AE-35C50A072168}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SQLBASE</RootNamespace>
-    <AssemblyName>SQLBASE</AssemblyName>
+    <RootNamespace>Veículo_Ex1</RootNamespace>
+    <AssemblyName>Veículo_Ex1</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

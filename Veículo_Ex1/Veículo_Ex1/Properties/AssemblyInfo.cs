@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Informações gerais sobre um assembly são controladas através do seguinte 
 // conjunto de atributos. Altere o valor destes atributos para modificar a informação
 // associada a um assembly.
-[assembly: AssemblyTitle("MeuIntParse")]
+[assembly: AssemblyTitle("Veículo_Ex1")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MeuIntParse")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyProduct("Veículo_Ex1")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // O GUID a seguir é para o ID da typelib se este projeto for exposto para COM
-[assembly: Guid("9edbaf1d-ca5f-4e33-8957-a8b094d4724c")]
+[assembly: Guid("93139f17-be72-4f65-95a3-dfd8f432250a")]
 
 // Informações de Versão para um assembly consistem nos quatro valores a seguir:
 //
