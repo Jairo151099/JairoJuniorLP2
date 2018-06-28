@@ -10,13 +10,14 @@ namespace Veículo_Ex1
     {
         static void Main(string[] args)
         {
-            int qtd;
+           int qtd;
 
 
             Carro carro = new Carro();
             
             Console.Write("Insira a quantidade de veículos");
             qtd = int.Parse(Console.ReadLine());
+            string[] vetor = new string[qtd];
 
             for (int i = 0; i < qtd; i++)
             {
@@ -32,9 +33,13 @@ namespace Veículo_Ex1
 
               
 
-                Console.WriteLine(Classificar(carro));
+               vetor[i] = Classificar(carro);
             }
+            for (int i = 0; i < qtd; i++)
+            {
 
+                Console.WriteLine(vetor[i]);
+            }
         }
         public static string Classificar(Carro carro)
         {
@@ -44,6 +49,9 @@ namespace Veículo_Ex1
             
             
             
+            
+            
+
             if (carro.Quilometragem > 25000)
             {
                 Est = "velho -";
@@ -75,6 +83,9 @@ namespace Veículo_Ex1
         }
     }
 }
+        
+    
+
         
     
 
