@@ -10,11 +10,11 @@ namespace Veículo_Ex1
     {
         static void Main(string[] args)
         {
-           string modelo;
+  string modelo;
             double quilometragem;
             int potencia;
             int qtd;
-            
+
             Console.Write("Insira a quantidade de veículos");
             qtd = int.Parse(Console.ReadLine());
 
@@ -31,43 +31,49 @@ namespace Veículo_Ex1
 
                 Console.Write("{0} - ", modelo);
 
-                if (quilometragem > 25000)
-                {
-                    Console.Write("velho -");
-                }
-                else if (quilometragem <= 500)
-                {
-                    Console.Write("Novo -");
-                }
-                else
-                {
-                    Console.Write("seminovo - ");
-                }
-
-                if (potencia > 170)
-                {
-                    Console.WriteLine("Potente");
-                }
-
-                else if (potencia < 90)
-                {
-                    Console.WriteLine("Popular");
-                }
-                else
-                {
-                    Console.WriteLine("Médio");
-                }
-
+                Classificar(modelo, quilometragem, potencia);
+                
             }
+       
+        }
+        public static string Classificar(string modelo, double quilometragem, int potencia)
+        {
+            if (quilometragem > 25000)
+            {
+                Console.Write("velho -");
+            }
+            else if (quilometragem <= 500)
+            {
+                Console.Write("Novo -");
+            }
+            else
+            {
+                Console.Write("seminovo - ");
+            }
+
+            if (potencia > 170)
+            {
+                Console.WriteLine("Potente");
+            }
+
+            else if (potencia < 90)
+            {
+                Console.WriteLine("Popular");
+            }
+            else
+            {
+                Console.WriteLine("Médio");
+            }
+            return String.Format("{0} - {1} - {2}", modelo, quilometragem, potencia);
         }
     }
 }
-            
         
     
 
-        
 
-    
+
+
+
 
 
